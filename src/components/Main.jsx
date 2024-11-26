@@ -1,15 +1,29 @@
+import { useState } from "react"
 import styles from "./Main.module.css"
 
 export default function Main() {
-    const ingredients = ["Chicken", "Oregano", "Tomatoes"]
-    const ingredientsListItems = ingredients.map((ingredient) => <li>{ingredient}</li> )
+    //Initializing state for ingredients
+    const [ingredients, setIngredients] = useState([]);
+
+    //Mapping ingredients to li items
+    const ingredientsListItems = ingredients.map(ingredient => (
+        <li key={ingredient}>{ingredient}</li>
+    ));
 
     function handleSubmit(event) {
-        event.preventDefault();
+        event.preventDefault(); // Prevents page refresh when submitting form
+
         const formData = new FormData(event.currentTarget);
-        const newIngredient = formData.get("ingredient");
-        ingredients.push(newIngredient);
-        console.log(ingredients);
+        const newIngredient = formData.get("ingredient").trim(); //Get form data and trim input from any whitespaces
+
+        //Snippet to only add ingredients when form is not empty
+        if (newIngredient) {
+            setIngredients(prevIngredients => [...prevIngredients, newIngredient]);
+        }
+
+        // Clear the input field after adding ingredient
+        event.currentTarget.reset();
+
     }
 
     return(
@@ -17,7 +31,7 @@ export default function Main() {
             <form onSubmit={handleSubmit} className={styles.addIngredientForm}>
                 <input 
                     type="text" 
-                    placeholder="e.g. chicken" 
+                    placeholder="e.g. Chicken" 
                     aria-label="Add ingredient"
                     name="ingredient" 
                 />
@@ -27,5 +41,5 @@ export default function Main() {
                 {ingredientsListItems}
             </ul>
         </main>
-    )
+    );
 }
