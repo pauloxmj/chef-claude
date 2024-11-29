@@ -5,7 +5,7 @@ export default function Header() {
     return(
         <header className={styles.container}>
             <img className={styles.logo} src={logo} alt="Chef Claude logo" />
-            <h1 className={styles.title}>Chef Claude</h1>
+            <h1 className={styles.title}>Chef Claudio</h1>
         </header>
     )
 }

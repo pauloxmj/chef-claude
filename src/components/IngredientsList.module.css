@@ -1,0 +1,46 @@
+h2 {
+    font-size: 1.875rem;
+    font-weight: 600;
+    margin-top: 50px;
+}
+
+.ingredientsList {
+    margin-bottom: 50px;
+}
+
+.ingredientsList > li {
+    color: #475467;
+    font-size: 1.125rem;
+    line-height: 40px;
+}
+
+.genRecipeContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F0EFEB;
+    border-radius: 8px;
+    padding: 10px 30px;
+}
+
+.genRecipeContainer h3 {
+    font-size: 1.125rem;
+    font-weight: 500;
+}
+
+.getRecipeContainer p {
+    color: #6B7280;
+    font-size: 0.875rem;
+}
+
+.genRecipeContainer > button {
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 9px 17px;
+    border-radius: 6px;
+    border: none;
+    background-color: #D17557;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+    margin-left: 80px;
+}

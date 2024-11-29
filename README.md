@@ -1,0 +1,1 @@
+React project for a recipe suggestion website using AI with the Hugging Face API
