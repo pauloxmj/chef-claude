@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import styles from "./Main.module.css";
 import Recipe from "./Recipe";
 import IngredientsList from "./IngredientsList";
@@ -6,9 +6,7 @@ import { getRecipeFromMistral } from "../ai.js";
 
 
 export default function Main() {
-    // Initializing state for ingredients
     const [ingredients, setIngredients] = useState([]);
-
     // Adding ingredients to state array using React 18 handling of form data:
     function handleSubmit(event) {
         event.preventDefault(); // Prevents page refresh when submitting form
@@ -21,8 +19,8 @@ export default function Main() {
         event.currentTarget.reset() // Clear the input field after adding ingredient
     }
 
-      // Generate recipe
     const [recipe, setRecipe] = useState("");
+    // Send recipe to AI to generate recipe
     async function getRecipe() {
         const generateRecipe = await getRecipeFromMistral(ingredients);
         setRecipe(generateRecipe);
@@ -35,6 +33,14 @@ export default function Main() {
     // }
     // <main>
     //  <form action={addIngredient} className={styles.addIngredientForm}>
+
+    const recipeSection = useRef(null);
+    //Jumping to recipe section after generating
+    useEffect(()=>{
+        if (recipe !== "" && recipeSection.current !== null) {
+            recipeSection.current.scrollIntoView({behavior: "smooth"})
+        }
+    }, [recipe])
 
     return(
         <main>
@@ -50,6 +56,7 @@ export default function Main() {
                 </form>
 
                 {ingredients.length > 0 ? <IngredientsList 
+                    ref= {recipeSection}
                     ingredients= {ingredients}
                     getRecipe= {getRecipe}
                 /> : <h2>Add at least 4 ingredients to your list to get your recipe.</h2>}
